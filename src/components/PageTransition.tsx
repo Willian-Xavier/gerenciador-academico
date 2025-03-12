@@ -14,7 +14,7 @@ const PageTransition = ({ children, className }: PageTransitionProps) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
-      className={cn("page-container", className)}
+      className={cn("page-container backdrop-blur-sm bg-white/5 rounded-xl p-6", className)}
     >
       {children}
     </motion.div>

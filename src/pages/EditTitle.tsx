@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getTitleById, updateTitle } from "@/services/titleService";
@@ -18,8 +17,10 @@ const EditTitle = () => {
   const { data: title, isLoading, error } = useQuery({
     queryKey: ["title", titleId],
     queryFn: () => getTitleById(titleId),
-    onError: () => {
-      toast.error("Não foi possível carregar os dados do título.");
+    meta: {
+      onError: () => {
+        toast.error("Não foi possível carregar os dados do título.");
+      },
     },
   });
 

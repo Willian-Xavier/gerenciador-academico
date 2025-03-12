@@ -73,8 +73,10 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
+    min-height: 100vh;
   }
 }
 
@@ -100,7 +102,7 @@
   }
 
   .page-title {
-    @apply text-3xl font-bold text-center mb-8;
+    @apply text-3xl font-bold text-center mb-8 text-white;
   }
 
   .form-container {
