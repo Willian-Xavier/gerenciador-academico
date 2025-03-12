@@ -78,6 +78,10 @@
     background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
     min-height: 100vh;
   }
+
+  .dark body {
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
+  }
 }
 
 @layer components {
@@ -107,5 +111,9 @@
 
   .form-container {
     @apply w-full max-w-lg mx-auto bg-card p-6 rounded-lg shadow-sm border border-border;
+  }
+
+  .icon-button {
+    @apply p-2 rounded-full transition-colors flex items-center justify-center;
   }
 }

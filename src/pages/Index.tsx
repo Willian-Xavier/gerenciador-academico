@@ -9,6 +9,7 @@ import DeleteConfirmation from "@/components/DeleteConfirmation";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Index = () => {
   const [titleToDelete, setTitleToDelete] = useState<Title | null>(null);
@@ -72,8 +73,8 @@ const Index = () => {
               <thead>
                 <tr>
                   <th className="table-header w-1/6 text-center">ID</th>
-                  <th className="table-header w-3/6">Descrição</th>
-                  <th className="table-header w-2/6 text-center">Ações</th>
+                  <th className="table-header w-4/6">Descrição</th>
+                  <th className="table-header w-1/6 text-center">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -90,26 +91,45 @@ const Index = () => {
                     >
                       <td className="table-cell text-center">{title.id}</td>
                       <td className="table-cell">{title.descricao}</td>
-                      <td className="table-cell text-center">
+                      <td className="table-cell">
                         <div className="flex justify-center gap-2">
-                          <Button 
-                            variant="outline" 
-                            className="bg-info text-info-foreground hover:bg-info/90 w-[100px]"
-                            asChild
-                          >
-                            <Link to={`/edit/${title.id}`} className="flex items-center justify-center gap-2">
-                              <Edit size={16} />
-                              Editar
-                            </Link>
-                          </Button>
-                          <Button 
-                            variant="outline" 
-                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90 w-[100px]"
-                            onClick={() => setTitleToDelete(title)}
-                          >
-                            <Trash size={16} className="mr-2" />
-                            Deletar
-                          </Button>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button 
+                                  size="icon"
+                                  variant="outline" 
+                                  className="bg-info text-info-foreground hover:bg-info/90 rounded-full h-9 w-9"
+                                  asChild
+                                >
+                                  <Link to={`/edit/${title.id}`}>
+                                    <Edit size={16} />
+                                  </Link>
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Editar</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                          
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <Button 
+                                  size="icon"
+                                  variant="outline" 
+                                  className="bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-full h-9 w-9"
+                                  onClick={() => setTitleToDelete(title)}
+                                >
+                                  <Trash size={16} />
+                                </Button>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Deletar</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
                         </div>
                       </td>
                     </motion.tr>
