@@ -11,11 +11,16 @@ interface TitleFormProps {
   initialValue?: string;
   onSubmit: (descricao: string) => Promise<void>;
   isEditing?: boolean;
+  isSubmitting?: boolean;
 }
 
-const TitleForm = ({ initialValue = "", onSubmit, isEditing = false }: TitleFormProps) => {
+const TitleForm = ({ 
+  initialValue = "", 
+  onSubmit, 
+  isEditing = false, 
+  isSubmitting = false 
+}: TitleFormProps) => {
   const [descricao, setDescricao] = useState(initialValue);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,14 +32,11 @@ const TitleForm = ({ initialValue = "", onSubmit, isEditing = false }: TitleForm
     }
     
     try {
-      setIsSubmitting(true);
       await onSubmit(descricao);
       navigate("/");
     } catch (error) {
       const message = error instanceof Error ? error.message : "Ocorreu um erro ao processar sua solicitação.";
       toast.error(message);
-    } finally {
-      setIsSubmitting(false);
     }
   };
 

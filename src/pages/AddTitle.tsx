@@ -1,29 +1,24 @@
 
 import { useMutation } from "@tanstack/react-query";
-import { createTitle } from "@/services/titleService";
 import TitleForm from "@/components/TitleForm";
-import { motion } from "framer-motion";
+import { createTitleInDb } from "@/lib/supabase";
 
 const AddTitle = () => {
-  const { mutateAsync } = useMutation({
-    mutationFn: (descricao: string) => createTitle(descricao),
+  const { mutateAsync: createTitle, isPending } = useMutation({
+    mutationFn: createTitleInDb,
   });
 
   const handleSubmit = async (descricao: string) => {
-    await mutateAsync(descricao);
+    await createTitle(descricao);
   };
 
   return (
     <div className="page-container">
-      <motion.h1 
-        className="page-title"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-      >
-        Adicionar Novo Título
-      </motion.h1>
-      <TitleForm onSubmit={handleSubmit} />
+      <h1 className="page-title">Adicionar Título</h1>
+      <TitleForm 
+        onSubmit={handleSubmit} 
+        isSubmitting={isPending}
+      />
     </div>
   );
 };

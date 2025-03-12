@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash } from "lucide-react";
-import { getTitles, deleteTitle, Title } from "@/services/titleService";
+import { fetchTitles, deleteTitleFromDb, Title } from "@/lib/supabase";
 import DeleteConfirmation from "@/components/DeleteConfirmation";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,12 +18,12 @@ const Index = () => {
   // Fetch titles
   const { data: titles, isLoading, error } = useQuery({
     queryKey: ["titles"],
-    queryFn: getTitles,
+    queryFn: fetchTitles,
   });
 
   // Delete mutation
   const { mutate: deleteMutation, isPending: isDeleting } = useMutation({
-    mutationFn: (id: number) => deleteTitle(id),
+    mutationFn: (id: number) => deleteTitleFromDb(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["titles"] });
       setTitleToDelete(null);
