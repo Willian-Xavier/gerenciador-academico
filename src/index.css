@@ -75,12 +75,16 @@
   body {
     @apply text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body.dark {
     background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
     min-height: 100vh;
   }
 
-  .dark body {
-    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 38%, rgba(0,212,255,1) 100%);
+  body:not(.dark) {
+    background: radial-gradient(circle, rgba(240,249,255,1) 0%, rgba(161,196,253,1) 50%, rgba(194,233,251,1) 100%);
+    min-height: 100vh;
   }
 }
 
